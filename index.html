@@ -803,6 +803,15 @@
                     // تحديث بيانات اللاعب الحالي إن وجدت
                     if (currentPlayer) {
                         currentPlayer = playersDB.find(p => p.username === currentPlayer.username) || currentPlayer;
+                    } else {
+                        // محاولة الدخول التلقائي بمجرد وصول البيانات الحقيقية من الخادم (يحل مشكلة التحديث)
+                        const savedUser = localStorage.getItem('foxCurrentUser');
+                        const savedPass = localStorage.getItem('foxCurrentPass');
+                        if (savedUser && savedPass && document.getElementById('loginSection').style.display !== 'none') {
+                            document.getElementById('username').value = savedUser;
+                            document.getElementById('password').value = savedPass;
+                            login(true);
+                        }
                     }
                 }
                 
@@ -850,6 +859,15 @@
                 currentPlayer.balance = matchData.newBalance;
                 document.getElementById('dominoPlayerBalance').innerText = currentPlayer.balance;
                 
+                // تحديث وحفظ الرصيد المخصوم في قاعدة البيانات والمزامنة مع الإدارة
+                let pIndex = playersDB.findIndex(p => p.username === currentPlayer.username);
+                if (pIndex !== -1) {
+                    playersDB[pIndex].balance = currentPlayer.balance;
+                    localStorage.setItem('foxPlayers', JSON.stringify(playersDB));
+                    emitState(); // تحديث الخادم وبقية الشاشات
+                }
+                if(document.getElementById('lobbyPlayerBalance')) document.getElementById('lobbyPlayerBalance').innerText = currentPlayer.balance;
+                
                 // حفظ بيانات المباراة وتحديث المؤشر
                 currentMatchId = matchData.matchId;
                 currentDominoTurn = matchData.turn;
@@ -889,6 +907,15 @@
                 if (data.newBalance !== undefined) {
                     currentPlayer.balance = data.newBalance;
                     document.getElementById('dominoPlayerBalance').innerText = currentPlayer.balance;
+                    
+                    // تحديث وحفظ رصيد الجائزة في قاعدة البيانات والمزامنة مع الإدارة
+                    let pIndex = playersDB.findIndex(p => p.username === currentPlayer.username);
+                    if (pIndex !== -1) {
+                        playersDB[pIndex].balance = currentPlayer.balance;
+                        localStorage.setItem('foxPlayers', JSON.stringify(playersDB));
+                        emitState(); // تحديث الخادم وبقية الشاشات
+                    }
+                    if(document.getElementById('lobbyPlayerBalance')) document.getElementById('lobbyPlayerBalance').innerText = currentPlayer.balance;
                 }
                 
                 // إظهار نافذة نهاية المباراة الشفافة داخل الرقعة
@@ -901,6 +928,17 @@
                 currentMatchId = null; // تفريغ آي دي المباراة حتى لا يحسب كانسحاب عند الخروج
             });
         }
+
+        // استعادة جلسة اللاعب تلقائياً عند تحديث الصفحة
+        window.onload = function() {
+            const savedUser = localStorage.getItem('foxCurrentUser');
+            const savedPass = localStorage.getItem('foxCurrentPass');
+            if (savedUser && savedPass) {
+                document.getElementById('username').value = savedUser;
+                document.getElementById('password').value = savedPass;
+                login(true); // تشغيل الدالة بصمت لتفادي الأخطاء قبل مزامنة الخادم
+            }
+        };
 
         // دالة نداء نستخدمها لإرسال التحديثات لجميع المتصلين عند كل حركة
         function emitState() {
@@ -944,7 +982,7 @@
         }
 
         // دالة تسجيل الدخول البسيطة
-        function login() {
+        function login(silent = false) {
             const user = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value.trim();
 
@@ -953,6 +991,9 @@
                 document.getElementById('adminSection').style.display = 'block';
                 loadLatestDrawStatus(); // جلب حالة السحب لآخر دورة
                 calculateAccounting(); // عرض إحصائيات المحاسبة
+                localStorage.setItem('foxCurrentUser', user); // حفظ الجلسة
+                localStorage.setItem('foxCurrentPass', pass);
+                if (socket) socket.emit('login_request', { username: user, password: pass }); // تعريف اللاعب للخادم
                 emitState(); // مزامنة البيانات مع الخادم فور الدخول
             } else if (user === 'admin' && pass !== 'admin123') {
                 alert("كلمة مرور الإدارة غير صحيحة!");
@@ -960,15 +1001,18 @@
                 // البحث عن اللاعب أو إضافته كلاعب جديد
                 currentPlayer = playersDB.find(p => p.username === user);
                 if (!currentPlayer) {
-                    alert("هذا الحساب غير موجود! يرجى التواصل مع الإدارة لإنشاء حساب.");
+                    if (!silent) alert("هذا الحساب غير موجود! يرجى التواصل مع الإدارة لإنشاء حساب.");
                     return;
                 }
                 if (currentPlayer.password && currentPlayer.password !== pass) {
-                    alert("كلمة المرور غير صحيحة!");
+                    if (!silent) alert("كلمة المرور غير صحيحة!");
                     return;
                 }
                 if (!currentPlayer.transactions) currentPlayer.transactions = []; // للنسخ القديمة
                 
+                localStorage.setItem('foxCurrentUser', user); // حفظ الجلسة
+                localStorage.setItem('foxCurrentPass', pass);
+                if (socket) socket.emit('login_request', { username: user, password: pass }); // تعريف اللاعب للخادم
                 emitState(); // مزامنة البيانات مع الخادم فور الدخول
                 // تجهيز بيانات صالة الألعاب ولعبة النرد
                 document.getElementById('lobbyPlayerName').innerText = currentPlayer.username;
@@ -1321,6 +1365,8 @@
 
         // دالة تسجيل الخروج للرجوع للواجهة الرئيسية
         function logout() {
+            localStorage.removeItem('foxCurrentUser');
+            localStorage.removeItem('foxCurrentPass');
             location.reload();
         }
 
