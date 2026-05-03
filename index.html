@@ -8,7 +8,7 @@
         /* تحديد الألوان الأساسية للموقع */
         :root {
             --fox-black: #111111;
-            --fox-orange: #FF8C00;
+            --fox-orange: #FFD700; /* تم التغيير إلى اللون الأصفر الذهبي */
             --fox-gray: #333333;
             --text-color: #ffffff;
         }
@@ -42,7 +42,7 @@
             width: 100%;
             max-width: 500px;
             text-align: center;
-            box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
             margin: auto; /* لتوسيط المربع في منتصف الشاشة دائماً */
         }
 
@@ -82,11 +82,11 @@
             padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold;
             cursor: pointer; transition: all 0.3s ease; text-align: center;
         }
-        .contactBox:hover { transform: scale(1.02); box-shadow: 0 0 10px rgba(255, 140, 0, 0.5); }
+        .contactBox:hover { transform: scale(1.02); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
 
         /* ألوان تتناسب مع هوية الموقع */
         .box-orange {
-            background: linear-gradient(90deg, var(--fox-orange), #d67600);
+            background: linear-gradient(90deg, var(--fox-orange), #cca300);
             color: var(--fox-black);
             border: 1px solid var(--fox-orange);
         }
@@ -153,7 +153,7 @@
         
         .player-info-text {
             color: var(--fox-orange); font-weight: bold; font-size: 17px; margin: 0 5px;
-            text-shadow: 0 0 5px rgba(255, 140, 0, 0.3);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
         }
         .player-label { color: #aaaaaa; font-size: 14px; }
         .toolbar-divider { color: #444; margin: 0 10px; }
@@ -177,7 +177,7 @@
             padding: 8px; text-align: center; cursor: pointer; transition: transform 0.2s;
         }
         .set-card:hover {
-            transform: scale(1.05); background: #333; box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+            transform: scale(1.05); background: #333; box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
         .set-id {
             font-size: 13px; color: var(--fox-orange); margin-bottom: 8px; font-weight: bold;
@@ -199,7 +199,7 @@
             width: 100%; margin-bottom: 20px;
             border: 1px solid var(--fox-orange); border-radius: 8px;
             overflow: hidden; background-color: #000;
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
         }
         .video-wrapper {
             position: relative; padding-bottom: 56.25%; height: 0;
@@ -244,7 +244,7 @@
         .games-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
         @media (max-width: 600px) { .games-grid { grid-template-columns: 1fr; } }
         .game-card { background: #222; border: 2px solid var(--fox-orange); border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: transform 0.3s, background 0.3s; }
-        .game-card:hover { transform: scale(1.05); background: #333; box-shadow: 0 0 15px rgba(255, 140, 0, 0.4); }
+        .game-card:hover { transform: scale(1.05); background: #333; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
         .game-card h3 { color: var(--fox-orange); margin: 10px 0; font-size: 22px; }
         .game-icon { font-size: 50px; }
         
@@ -254,19 +254,21 @@
         .table-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1); }
         
         /* تنسيقات قطع الدومنه والرقعة */
-        .domino-piece { direction: ltr; background: #fffff0; border-radius: 6px; border: 1px solid #333; box-shadow: 2px 2px 6px rgba(0,0,0,0.6), inset 1px 1px 3px white, inset -1px -1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; width: 35px; height: 70px; cursor: pointer; transition: transform 0.2s; user-select: none; }
-        .domino-piece:hover { transform: translateY(-10px); box-shadow: 2px 10px 15px rgba(255, 140, 0, 0.6); }
+        .domino-piece { direction: ltr; background: linear-gradient(145deg, #fffff8 0%, #e8e8d8 100%); border-radius: 4px; border: 1px solid #444; box-shadow: 2px 3px 6px rgba(0,0,0,0.5), inset 1px 1px 2px rgba(255,255,255,0.9), inset -1px -1px 2px rgba(0,0,0,0.1); display: flex; flex-direction: column; width: 34px; height: 68px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; user-select: none; position: relative; margin: 0 -1px; z-index: 2; }
+        .domino-piece::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 5px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); pointer-events: none; }
+        .domino-piece:hover { transform: translateY(-8px); box-shadow: 2px 8px 12px rgba(255, 215, 0, 0.6); z-index: 10; margin: 0 2px; }
         .domino-half { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
-        .domino-half.top { border-bottom: 2px solid #222; }
-        .domino-piece.horizontal { flex-direction: row; width: 70px; height: 35px; }
-        .domino-piece.horizontal .domino-half.top { border-bottom: none; border-right: 2px solid #222; }
-        .domino-piece.hidden { background: #111; border: 1px solid #555; background-image: repeating-linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222); background-size: 10px 10px; cursor: default; }
-        .domino-piece.hidden:hover { transform: none; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
+        .domino-half.top { border-bottom: 2px solid #333; }
+        .domino-piece.horizontal { flex-direction: row; width: 68px; height: 34px; }
+        .domino-piece.horizontal .domino-half.top { border-bottom: none; border-right: 2px solid #333; }
+        .domino-piece.hidden { background: #1a1a1a; border: 1px solid #333; background-image: radial-gradient(#2a2a2a 20%, transparent 20%), radial-gradient(#2a2a2a 20%, transparent 20%); background-size: 10px 10px; background-position: 0 0, 5px 5px; cursor: default; }
+        .domino-piece.hidden::before { display: none; }
+        .domino-piece.hidden:hover { transform: none; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); z-index: 1; }
         
         /* تصميم النقاط الواقعية (Dots) */
-        .domino-dots-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+        .domino-dots-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
         .domino-piece.horizontal .domino-dots-container { transform: rotate(-90deg); }
-        .domino-dot { position: absolute; width: 8px; height: 8px; background: #111; border-radius: 50%; box-shadow: inset -1px -1px 2px rgba(255,255,255,0.3), 1px 1px 1px rgba(255,255,255,0.8); }
+        .domino-dot { position: absolute; width: 7.5px; height: 7.5px; background: #0a0a0a; border-radius: 50%; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.9), 0.5px 0.5px 1px rgba(255,255,255,0.7); }
         .dot-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
         .dot-tl { top: 4px; left: 4px; }
         .dot-tr { top: 4px; right: 4px; }
@@ -277,15 +279,6 @@
 
         /* حركة دوران الانتظار */
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        /* تنسيق شريط الوقت (Timer) */
-        .timer-container { width: 100%; max-width: 250px; background: #333; border-radius: 10px; height: 8px; margin: 10px auto; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); display: none; }
-        .timer-bar { height: 100%; width: 100%; background: #4CAF50; border-radius: 10px; transition: width 1s linear, background-color 0.5s; }
-        @keyframes countdownBar {
-            0% { width: 100%; background: #4CAF50; }
-            60% { background: #FFC107; }
-            100% { width: 0%; background: #F44336; }
-        }
 
         /* تنسيقات أزرار الرهان (النرد) */
         .bet-options {
@@ -704,24 +697,21 @@
 
             <!-- واجهة رقعة اللعب (Board) -->
             <div id="dominoBoardSection" style="display: none; margin-top: 20px;">
-                <div style="background: #1a5223; border: 5px solid #3e2723; border-radius: 15px; padding: 20px; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.6);">
+                <div style="background: #1a5223; border: 5px solid #3e2723; border-radius: 15px; padding: 20px; min-height: 350px; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.6);">
                     <!-- منطقة الخصم -->
-                    <div style="text-align: center; color: white; margin-bottom: 10px;">
+                    <div style="text-align: center; color: white; margin-bottom: 20px;">
                         <span id="opponentNameBoard" style="background: #111; padding: 5px 15px; border-radius: 20px; font-size: 14px; border: 1px solid #555;">الخصم</span>
                         <div id="opponentHand" style="display: flex; justify-content: center; gap: 5px; margin-top: 15px;"></div>
                     </div>
 
                     <!-- ساحة اللعب (الرقعة) -->
-                    <div dir="ltr" style="width: 100%; min-height: 250px; flex-grow: 1; margin: 15px 0; background: rgba(0,0,0,0.25); border-radius: 10px; padding: 15px; overflow-y: auto; overflow-x: hidden; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 5px 15px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
-                        <div id="playingBoard" style="display: flex; justify-content: center; align-items: center; align-content: center; flex-wrap: wrap; gap: 0px; width: 100%; padding: 10px;">
-                            <p style="color: rgba(255,255,255,0.3); text-align: center; margin: 0;">(الرقعة فارغة)</p>
-                        </div>
+                    <div id="playingBoard" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1px; min-height: 150px; background: rgba(0,0,0,0.15); border-radius: 10px; padding: 15px;">
+                        <p style="color: rgba(255,255,255,0.3); width: 100%; margin: 0;">(الرقعة فارغة)</p>
                     </div>
 
                     <!-- منطقة اللاعب (أنا) -->
-                    <div style="text-align: center; color: white; margin-top: 10px;">
+                    <div style="text-align: center; color: white; margin-top: 20px;">
                         <div id="turnIndicator" style="font-weight: bold; margin-bottom: 10px; font-size: 16px;"></div>
-                        <div id="turnTimer" class="timer-container"><div id="turnTimerBar" class="timer-bar"></div></div>
                         <div id="myHand" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;"></div>
                         <span id="myNameBoard" style="background: var(--fox-orange); color: var(--fox-black); font-weight: bold; padding: 5px 15px; border-radius: 20px; font-size: 14px;">أنا</span>
                         <button onclick="passDominoTurn()" style="background: #333; color: white; border: 1px solid #555; padding: 5px 15px; border-radius: 5px; margin-right: 10px; cursor: pointer;">سحب / تمرير الدور ⏭️</button>
@@ -747,17 +737,6 @@
         <div style="font-size: 70px; margin-bottom: 20px; animation: spin 2s linear infinite;">⏳</div>
         <h2 style="color: var(--fox-orange);">جاري البحث عن خصم...</h2>
         <p style="color: #ccc; margin-bottom: 20px;">الرجاء الانتظار قليلاً (إذا لم يتوفر لاعب سيتم إدخال الروبوت 🤖)</p>
-    </div>
-
-    <!-- نافذة اختيار جهة اللعب (يمين أو يسار) -->
-    <div id="chooseSideModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2500; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
-        <h2 style="color: white; margin-bottom: 20px;">الرقم متطابق من الجهتين! ✌️</h2>
-        <p style="color: #ccc; margin-bottom: 30px; font-size: 18px;">أين تريد وضع هذا الحجر؟</p>
-        <div style="display: flex; gap: 20px; flex-direction: row-reverse;">
-            <button onclick="submitDominoSide('right')" style="padding: 15px 30px; font-size: 18px; background: #4CAF50; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: transform 0.2s;">جهة اليمين 👉</button>
-            <button onclick="submitDominoSide('left')" style="padding: 15px 30px; font-size: 18px; background: #2196F3; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: transform 0.2s;">👈 جهة اليسار</button>
-        </div>
-        <button onclick="cancelSideChoice()" style="margin-top: 30px; padding: 10px 30px; background: #333; color: white; border: 1px solid #777; border-radius: 8px; cursor: pointer; font-size: 16px;">❌ إلغاء</button>
     </div>
 
     <!-- ربط الواجهة بالعقل المدبر (الخادم) -->
@@ -787,8 +766,6 @@
         let currentMatchId = null; // تخزين آي دي المباراة الحالية
         let currentDominoTurn = null; // تخزين دور من الآن
         let lastEntryPrice = null; // تخزين سعر الطاولة الحالية لإعادة اللعب بسلاسة
-        let turnTimerInterval = null; // التحكم بمؤقت الشريط
-        let pendingTileChoice = null; // لتخزين الحجر الذي ينتظر تحديد الجهة
 
         // --- إعدادات Socket.io للتحديث اللحظي المباشر ---
         if (socket) {
@@ -803,15 +780,6 @@
                     // تحديث بيانات اللاعب الحالي إن وجدت
                     if (currentPlayer) {
                         currentPlayer = playersDB.find(p => p.username === currentPlayer.username) || currentPlayer;
-                    } else {
-                        // محاولة الدخول التلقائي بمجرد وصول البيانات الحقيقية من الخادم (يحل مشكلة التحديث)
-                        const savedUser = localStorage.getItem('foxCurrentUser');
-                        const savedPass = localStorage.getItem('foxCurrentPass');
-                        if (savedUser && savedPass && document.getElementById('loginSection').style.display !== 'none') {
-                            document.getElementById('username').value = savedUser;
-                            document.getElementById('password').value = savedPass;
-                            login(true);
-                        }
                     }
                 }
                 
@@ -829,12 +797,6 @@
             // استقبال رسائل الخطأ من الخادم
             socket.on('error_msg', (msg) => {
                 alert(msg);
-            });
-            
-            // نافذة الاختيار إذا تطابق الحجر مع الجهتين
-            socket.on('choose_domino_side', (tile) => {
-                pendingTileChoice = tile;
-                document.getElementById('chooseSideModal').style.display = 'flex';
             });
 
             // تأكيد دخول غرفة الانتظار
@@ -859,15 +821,6 @@
                 currentPlayer.balance = matchData.newBalance;
                 document.getElementById('dominoPlayerBalance').innerText = currentPlayer.balance;
                 
-                // تحديث وحفظ الرصيد المخصوم في قاعدة البيانات والمزامنة مع الإدارة
-                let pIndex = playersDB.findIndex(p => p.username === currentPlayer.username);
-                if (pIndex !== -1) {
-                    playersDB[pIndex].balance = currentPlayer.balance;
-                    localStorage.setItem('foxPlayers', JSON.stringify(playersDB));
-                    emitState(); // تحديث الخادم وبقية الشاشات
-                }
-                if(document.getElementById('lobbyPlayerBalance')) document.getElementById('lobbyPlayerBalance').innerText = currentPlayer.balance;
-                
                 // حفظ بيانات المباراة وتحديث المؤشر
                 currentMatchId = matchData.matchId;
                 currentDominoTurn = matchData.turn;
@@ -889,17 +842,6 @@
                 let turnColor = isMyTurn ? "#4CAF50" : "#ff9800";
                 let turnInd = document.getElementById('turnIndicator');
                 if(turnInd) turnInd.innerHTML = `<span style="color:${turnColor}">${turnText}</span>`;
-                
-                // تشغيل شريط الوقت المرئي
-                let timerContainer = document.getElementById('turnTimer');
-                let timerBar = document.getElementById('turnTimerBar');
-                timerContainer.style.display = 'block';
-                
-                // إعادة تشغيل الأنيميشن
-                timerBar.style.animation = 'none';
-                void timerBar.offsetWidth; // إجبار المتصفح على قراءة التغيير
-                // مدة الدور 15 ثانية (يمكن ربطها بالخادم لاحقاً)
-                timerBar.style.animation = 'countdownBar 15s linear forwards';
             });
 
             // انتهاء المباراة وإعلان الفائز
@@ -907,15 +849,6 @@
                 if (data.newBalance !== undefined) {
                     currentPlayer.balance = data.newBalance;
                     document.getElementById('dominoPlayerBalance').innerText = currentPlayer.balance;
-                    
-                    // تحديث وحفظ رصيد الجائزة في قاعدة البيانات والمزامنة مع الإدارة
-                    let pIndex = playersDB.findIndex(p => p.username === currentPlayer.username);
-                    if (pIndex !== -1) {
-                        playersDB[pIndex].balance = currentPlayer.balance;
-                        localStorage.setItem('foxPlayers', JSON.stringify(playersDB));
-                        emitState(); // تحديث الخادم وبقية الشاشات
-                    }
-                    if(document.getElementById('lobbyPlayerBalance')) document.getElementById('lobbyPlayerBalance').innerText = currentPlayer.balance;
                 }
                 
                 // إظهار نافذة نهاية المباراة الشفافة داخل الرقعة
@@ -924,21 +857,9 @@
                 document.getElementById('endMatchTitle').innerText = isWinner ? "🎉 انتصار!" : (isDraw ? "🤝 تعادل" : "😢 خسارة");
                 document.getElementById('endMatchMsg').innerText = data.msg + "\nالفائز: " + data.winner;
                 document.getElementById('endMatchOverlay').style.display = 'flex';
-                document.getElementById('turnTimer').style.display = 'none'; // إخفاء الشريط
                 currentMatchId = null; // تفريغ آي دي المباراة حتى لا يحسب كانسحاب عند الخروج
             });
         }
-
-        // استعادة جلسة اللاعب تلقائياً عند تحديث الصفحة
-        window.onload = function() {
-            const savedUser = localStorage.getItem('foxCurrentUser');
-            const savedPass = localStorage.getItem('foxCurrentPass');
-            if (savedUser && savedPass) {
-                document.getElementById('username').value = savedUser;
-                document.getElementById('password').value = savedPass;
-                login(true); // تشغيل الدالة بصمت لتفادي الأخطاء قبل مزامنة الخادم
-            }
-        };
 
         // دالة نداء نستخدمها لإرسال التحديثات لجميع المتصلين عند كل حركة
         function emitState() {
@@ -982,7 +903,7 @@
         }
 
         // دالة تسجيل الدخول البسيطة
-        function login(silent = false) {
+        function login() {
             const user = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value.trim();
 
@@ -991,9 +912,6 @@
                 document.getElementById('adminSection').style.display = 'block';
                 loadLatestDrawStatus(); // جلب حالة السحب لآخر دورة
                 calculateAccounting(); // عرض إحصائيات المحاسبة
-                localStorage.setItem('foxCurrentUser', user); // حفظ الجلسة
-                localStorage.setItem('foxCurrentPass', pass);
-                if (socket) socket.emit('login_request', { username: user, password: pass }); // تعريف اللاعب للخادم
                 emitState(); // مزامنة البيانات مع الخادم فور الدخول
             } else if (user === 'admin' && pass !== 'admin123') {
                 alert("كلمة مرور الإدارة غير صحيحة!");
@@ -1001,18 +919,15 @@
                 // البحث عن اللاعب أو إضافته كلاعب جديد
                 currentPlayer = playersDB.find(p => p.username === user);
                 if (!currentPlayer) {
-                    if (!silent) alert("هذا الحساب غير موجود! يرجى التواصل مع الإدارة لإنشاء حساب.");
+                    alert("هذا الحساب غير موجود! يرجى التواصل مع الإدارة لإنشاء حساب.");
                     return;
                 }
                 if (currentPlayer.password && currentPlayer.password !== pass) {
-                    if (!silent) alert("كلمة المرور غير صحيحة!");
+                    alert("كلمة المرور غير صحيحة!");
                     return;
                 }
                 if (!currentPlayer.transactions) currentPlayer.transactions = []; // للنسخ القديمة
                 
-                localStorage.setItem('foxCurrentUser', user); // حفظ الجلسة
-                localStorage.setItem('foxCurrentPass', pass);
-                if (socket) socket.emit('login_request', { username: user, password: pass }); // تعريف اللاعب للخادم
                 emitState(); // مزامنة البيانات مع الخادم فور الدخول
                 // تجهيز بيانات صالة الألعاب ولعبة النرد
                 document.getElementById('lobbyPlayerName').innerText = currentPlayer.username;
@@ -1072,7 +987,7 @@
                         // توليد HTML للأرقام المسحوبة الخاصة بهذه الدورة
                         let drawnNumsHTML = '<span style="color: #777; font-size: 13px;">لم يتم سحب أي رقم بعد...</span>';
                         if (round.drawnNumbers && round.drawnNumbers.length > 0) {
-                            drawnNumsHTML = round.drawnNumbers.map(n => `<div style="background: var(--fox-orange); color: var(--fox-black); padding: 5px 10px; border-radius: 4px; font-weight: bold; box-shadow: 0 0 5px rgba(255,140,0,0.5);">${n}</div>`).join('');
+                            drawnNumsHTML = round.drawnNumbers.map(n => `<div style="background: var(--fox-orange); color: var(--fox-black); padding: 5px 10px; border-radius: 4px; font-weight: bold; box-shadow: 0 0 5px rgba(255,215,0,0.5);">${n}</div>`).join('');
                         }
 
                         roundsContainer.innerHTML += `
@@ -1365,8 +1280,6 @@
 
         // دالة تسجيل الخروج للرجوع للواجهة الرئيسية
         function logout() {
-            localStorage.removeItem('foxCurrentUser');
-            localStorage.removeItem('foxCurrentPass');
             location.reload();
         }
 
@@ -1450,7 +1363,7 @@
                 if (round.drawnNumbers.length === 0) {
                     container.innerHTML = '<span style="color: #777; font-size: 13px;">لم يتم سحب أي رقم بعد...</span>';
                 } else {
-                    container.innerHTML = round.drawnNumbers.map(n => `<div style="background: var(--fox-orange); color: var(--fox-black); padding: 5px 10px; border-radius: 4px; font-weight: bold; box-shadow: 0 0 5px rgba(255,140,0,0.5);">${n}</div>`).join('');
+                    container.innerHTML = round.drawnNumbers.map(n => `<div style="background: var(--fox-orange); color: var(--fox-black); padding: 5px 10px; border-radius: 4px; font-weight: bold; box-shadow: 0 0 5px rgba(255,215,0,0.5);">${n}</div>`).join('');
                 }
             }
         }
@@ -1687,19 +1600,6 @@
             }
         }
 
-        // دوال تحديد جهة اللعب
-        function submitDominoSide(side) {
-            if (pendingTileChoice && currentMatchId && socket) {
-                socket.emit('play_domino_tile', { matchId: currentMatchId, tile: pendingTileChoice, side: side });
-                document.getElementById('chooseSideModal').style.display = 'none';
-                pendingTileChoice = null;
-            }
-        }
-        function cancelSideChoice() {
-            document.getElementById('chooseSideModal').style.display = 'none';
-            pendingTileChoice = null;
-        }
-
         // دالة مساعدة لإنشاء شكل قطعة الدومنه برمجياً (HTML)
         function createDominoPiece(topNum, bottomNum, isHidden = false, isHorizontal = false) {
             let piece = document.createElement('div');
@@ -1744,77 +1644,15 @@
             
             if (boardTiles.length === 0) {
                 board.innerHTML = '<p style="color: rgba(255,255,255,0.3); width: 100%; margin: 0;">(الرقعة فارغة - ابدأ بوضع حجر)</p>';
-                board.style.alignItems = 'center';
             } else {
-                board.style.alignItems = 'flex-start'; // البدء من أقصى اليسار
-
-                let isRightToLeft = false; // لتحديد مسار السطر
-                let stoneCount = 0;
-                
-                // إنشاء السطر الأول
-                let currentRow = document.createElement('div');
-                currentRow.style.display = 'flex';
-                currentRow.style.flexDirection = 'row';
-                currentRow.style.alignItems = 'center';
-                currentRow.style.alignSelf = 'flex-start';
-                currentRow.style.marginBottom = '-1px'; // تداخل السطور
-                board.appendChild(currentRow);
-
-                boardTiles.forEach((t, index) => {
-                    let isDouble = (t[0] === t[1]);
-                    let isHorizontal = !isDouble;
-
-                    // عند الوصول للحجر التاسع (بعد 8 أحجار)، اصنع زاوية عمودية وانزل للسطر التالي!
-                    if (stoneCount === 8) {
-                        let cornerPiece = createDominoPiece(t[0], t[1], false, false); // إجبار الحجر ليكون عمودي
-                        
-                        if (isRightToLeft) cornerPiece.style.transform = 'rotate(180deg)'; // قلب الأرقام للواقعية
-                        
-                        let cornerContainer = document.createElement('div');
-                        cornerContainer.style.display = 'flex';
-                        cornerContainer.style.width = '100%';
-                        cornerContainer.style.justifyContent = isRightToLeft ? 'flex-start' : 'flex-end';
-                        
-                        // محاذاة الحجر العمودي بالضبط تحت نهاية الحجر الأفقي السابق
-                        let prevIsDouble = boardTiles[index - 1] ? (boardTiles[index - 1][0] === boardTiles[index - 1][1]) : false;
-                        let offset = prevIsDouble ? '0px' : '17px';
-                        if (isRightToLeft) { cornerPiece.style.marginLeft = offset; } else { cornerPiece.style.marginRight = offset; }
-                        
-                        cornerContainer.appendChild(cornerPiece);
-                        board.appendChild(cornerContainer);
-
-                        // تجهيز السطر الجديد المعاكس
-                        isRightToLeft = !isRightToLeft;
-                        currentRow = document.createElement('div');
-                        currentRow.style.display = 'flex';
-                        currentRow.style.flexDirection = isRightToLeft ? 'row-reverse' : 'row';
-                        currentRow.style.alignItems = 'center';
-                        currentRow.style.alignSelf = isRightToLeft ? 'flex-end' : 'flex-start';
-                        currentRow.style.marginBottom = '-1px';
-                        board.appendChild(currentRow);
-                        
-                        stoneCount = 0; // تصفير عداد السطر
-                    } else {
-                        let piece = createDominoPiece(t[0], t[1], false, isHorizontal);
-                        // إذا كنا في مسار العودة (من اليمين لليسار)، نقلب الحجر لتبقى الأرقام متصلة ببعضها
-                        if (isRightToLeft && isHorizontal) piece.style.transform = 'rotate(180deg)';
-                        
-                        currentRow.appendChild(piece);
-                        stoneCount++;
-                    }
+                // رسم الأحجار على الرقعة بشكل أفقي
+                boardTiles.forEach(t => {
+                    board.appendChild(createDominoPiece(t[0], t[1], false, true));
                 });
             }
 
             myHandData.forEach(t => myHand.appendChild(createDominoPiece(t[0], t[1])));
             for(let i = 0; i < oppHandCount; i++) oppHand.appendChild(createDominoPiece(0, 0, true));
-
-            // تمرير الرقعة تلقائياً للأسفل في حال امتلأت الشاشة بالأحجار عمودياً
-            setTimeout(() => {
-                const boardContainer = document.getElementById('playingBoard').parentElement;
-                if (boardContainer.scrollHeight > boardContainer.clientHeight) {
-                    boardContainer.scrollTop = boardContainer.scrollHeight;
-                }
-            }, 50);
         }
     </script>
 </body>
